@@ -26,11 +26,11 @@ export function getSum(array) {
  * console.log(getMedian(array)); // 4.5
  */
 export function getMedian(array) {
-    let sa = array.sort();
-    if (sa.length % 2 != 0){
-        return sa[(sa.length + 1)/2];
+    let sa = array.sort((a,b) => a-b);
+    if (sa.length % 2 == 0){
+        return (sa[sa.length/2]+sa[sa.length/2+1])/2;
     }
-    return (sa[Math.floor((sa.length-1)/2)] + sa[sa.length / 2]) / 2;
+    return sa[(sa.length+1)/2];
 }
 
 /**
