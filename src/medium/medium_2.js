@@ -23,7 +23,7 @@ see under the methods section
 var hycount = 0;
 
 for (let i=0; i < mpg_data.length; i++){
-    if (mpg_data[i].hybrid == True){
+    if (mpg_data[i].hybrid){
         hycount++
     }
 }
