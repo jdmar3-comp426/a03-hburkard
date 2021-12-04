@@ -120,9 +120,48 @@ export function f_allYearStats(mpg) {
  *    if maker
  *}
  **/
+export function makerOfHybrids (mpg){
+    var maker = [];
+    for (let i=0; i < mpg.length; i++){
+        if (mpg[i].hybrid){
+            if (maker.some(element => element.make === mpg[i].make)){
+                maker[mpg[i].make].hybrids.push(mpg[i].id);
+            }
+            else{
+                maker.push({
+                    "make": mpg[i].make,
+                    "hybrids": [mpg[i].id]
+                })
+            }
+        }
+    }
+
+}
+
+/*
+export function ampyh (mpg){
+    var maker = {};
+    for (let i=0; i < mpg.length; i++){
+        if (mpg.year in maker){
+            mpg.year
+        }
+        if (mpg[i].hybrid){
+            if (maker.some(element => element.make === mpg[i].make)){
+                maker[mpg[i].make].hybrids.push(mpg[i].id);
+            }
+            else{
+                maker.push({
+                    "make": mpg[i].make,
+                    "hybrids": [mpg[i].id]
+                })
+            }
+        }
+    }
+}
+*/
 
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: makerOfHybrids(mpg_data),
     avgMpgByYearAndHybrid: undefined
 };
 
