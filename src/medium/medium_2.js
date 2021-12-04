@@ -29,14 +29,34 @@ for (let i=0; i < mpg_data.length; i++){
 }
 
 export const allCarStats = {
-    avgMpg: {
-        city_mpg: getStatistics(mpg_data.keys("city_mpg")).mean,
-        highway_mpg: getStatistics(mpg_data.keys("highway_mpg")).mean
-    },
-    allYearStats: getStatistics(mpg_data.keys("year")),
-    ratioHybrids: hycount/mpg_data.length,
+    avgMpg: f_avgMpg(mpg_data),
+    allYearStats: f_allYearStats(mpg_data),
+    ratioHybrids: hycount/mpg_data.length
 };
 
+export function f_avgMpg(mpg) {
+    let hwy1 = [];
+    let city1 = [];
+
+    for (let i=0; i<mpg.length; i++){
+        hwy1.push(mpg[i]['highway_mpg']);
+    }
+    for (let i=0; i<mpg.length; i++){
+        city1.push(mpg[i]['city_mpg']);
+    }
+    return {
+        city: getStatistics(city1).mean,
+        highway: getStatistics(hwy1).mean
+    }
+};
+
+export function f_allYearStats(mpg) {
+    let years = [];
+    for (let i=0; i<mpg.length; i++){
+        years.push(mpg[i]['year']);
+    }
+    return getStatistics(years);
+}
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
